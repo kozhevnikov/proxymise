@@ -11,11 +11,11 @@ describe('handler.apply', () => {
       foo() {
         return {
           bar() {
-            return 'qux';
+            return 'baz';
           }
         };
       }
     }));
-    expect(proxy().foo().bar()).toBe('qux');
+    expect(proxy().foo().bar()).toBe('baz');
   });
 });
