@@ -15,6 +15,15 @@ const handler = {
   get(target, property, receiver) {
     debug('get', property);
     return proxy(Reflect.get(target, property, receiver));
+  },
+
+  /**
+   * Trap for a function call
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/apply
+   */
+  apply(target, thisArg, argumentsList) {
+    debug('apply');
+    return proxy(Reflect.apply(target, thisArg, argumentsList));
   }
 };
 
