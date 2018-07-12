@@ -10,14 +10,20 @@
     "index.js"
   ],
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest --verbose"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.13.0"
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "jest": "^23.4.0"
   },
   "eslintConfig": {
-    "extends": "airbnb-base"
+    "extends": [
+      "airbnb-base",
+      "plugin:jest/recommended"
+    ]
   }
 }
