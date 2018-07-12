@@ -14,6 +14,11 @@ const handler = {
    */
   get(target, property, receiver) {
     debug('get', property);
+
+    if (property !== 'then' && typeof target.then === 'function') {
+      return proxy(target.then(value => Reflect.get(value, property, receiver)));
+    }
+
     const value = Reflect.get(target, property, receiver);
     return proxy(typeof value === 'function' ? value.bind(target) : value);
   },
