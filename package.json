@@ -30,6 +30,8 @@
     ],
     "rules": {
       "comma-dangle": "off",
+      "no-param-reassign": "off",
+      "no-underscore-dangle": "off",
       "no-use-before-define": "off"
     }
   }

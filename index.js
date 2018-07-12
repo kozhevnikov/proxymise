@@ -1,10 +1,19 @@
 const debug = require('debug')('proxymise');
 
-const proxy = (target) => {
-  if (typeof target === 'object' || typeof target === 'function') {
-    return new Proxy(target, handler);
+const proxymise = (target) => {
+  switch (typeof target) {
+    case 'function': {
+      return new Proxy(target, handler);
+    }
+    case 'object': {
+      const proxy = () => target;
+      proxy.__proxy__ = true;
+      return new Proxy(proxy, handler);
+    }
+    default: {
+      return target;
+    }
   }
-  return target;
 };
 
 const handler = {
@@ -15,12 +24,14 @@ const handler = {
   get(target, property, receiver) {
     debug('get', property);
 
+    if (target.__proxy__) target = target();
+
     if (property !== 'then' && typeof target.then === 'function') {
-      return proxy(target.then(value => Reflect.get(value, property, receiver)));
+      return proxymise(target.then(value => Reflect.get(value, property, receiver)));
     }
 
     const value = Reflect.get(target, property, receiver);
-    return proxy(typeof value === 'function' ? value.bind(target) : value);
+    return proxymise(typeof value === 'function' ? value.bind(target) : value);
   },
 
   /**
@@ -29,8 +40,15 @@ const handler = {
    */
   apply(target, thisArg, argumentsList) {
     debug('apply');
-    return proxy(Reflect.apply(target, thisArg, argumentsList));
+
+    if (target.__proxy__) target = target();
+
+    if (typeof target.then === 'function') {
+      return proxymise(target.then(value => Reflect.apply(value, thisArg, argumentsList)));
+    }
+
+    return proxymise(Reflect.apply(target, thisArg, argumentsList));
   }
 };
 
-module.exports = proxy;
+module.exports = proxymise;

@@ -26,4 +26,32 @@ describe('Promise', () => {
     const promise = proxymise(async () => 'foo');
     expect(await promise()).toBe('foo');
   });
+
+  it('should apply nested function', async () => {
+    const promise = proxymise(async () => ({
+      async foo() {
+        return {
+          async bar() {
+            return 'baz';
+          }
+        };
+      }
+    }));
+    expect(await promise().foo().bar()).toBe('baz');
+  });
+
+  it('should get/apply object/function', async () => {
+    const promise = proxymise({
+      async foo() {
+        return {
+          bar: {
+            async baz() {
+              return 'qux';
+            }
+          }
+        };
+      }
+    });
+    expect(await promise.foo().bar.baz()).toBe('qux');
+  });
 });
