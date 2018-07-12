@@ -12,7 +12,13 @@ describe('handler.get', () => {
   });
 
   it('should get nested object', () => {
-    const proxy = proxymise({ foo: { bar: 'baz' } });
-    expect(proxy.foo.bar).toBe('baz');
+    const proxy = proxymise({
+      foo: {
+        bar: {
+          baz: 'qux'
+        }
+      }
+    });
+    expect(proxy.foo.bar.baz).toBe('qux');
   });
 });

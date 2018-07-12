@@ -9,9 +9,13 @@ describe('handler.apply', () => {
   it('should apply nested function', () => {
     const proxy = proxymise(() => ({
       foo() {
-        return 'bar';
+        return {
+          bar() {
+            return 'qux';
+          }
+        };
       }
     }));
-    expect(proxy().foo()).toBe('bar');
+    expect(proxy().foo().bar()).toBe('qux');
   });
 });
