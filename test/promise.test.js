@@ -6,6 +6,15 @@ describe('Promise', () => {
     expect(await promise).toBe('foo');
   });
 
+  it('should get value property', async () => {
+    const promise = proxymise({
+      async foo() {
+        return 'bar';
+      }
+    });
+    expect(await promise.foo().length.toString()).toBe('3');
+  });
+
   it('should get object', async () => {
     const promise = proxymise(Promise.resolve({ foo: 'bar' }));
     expect(await promise.foo).toBe('bar');
