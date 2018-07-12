@@ -14,7 +14,8 @@ const handler = {
    */
   get(target, property, receiver) {
     debug('get', property);
-    return proxy(Reflect.get(target, property, receiver));
+    const value = Reflect.get(target, property, receiver);
+    return proxy(typeof value === 'function' ? value.bind(target) : value);
   },
 
   /**
