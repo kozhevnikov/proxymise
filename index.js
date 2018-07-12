@@ -1,5 +1,12 @@
 const debug = require('debug')('proxymise');
 
+const proxy = (target) => {
+  if (typeof target === 'object' || typeof target === 'function') {
+    return new Proxy(target, handler);
+  }
+  return target;
+};
+
 const handler = {
   /**
    * Trap for getting a property value
@@ -7,8 +14,8 @@ const handler = {
    */
   get(target, property, receiver) {
     debug('get', property);
-    return Reflect.get(target, property, receiver);
+    return proxy(Reflect.get(target, property, receiver));
   }
 };
 
-module.exports = target => new Proxy(target, handler);
+module.exports = proxy;

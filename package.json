@@ -29,7 +29,8 @@
       "plugin:jest/recommended"
     ],
     "rules": {
-      "comma-dangle": "off"
+      "comma-dangle": "off",
+      "no-use-before-define": "off"
     }
   }
 }
