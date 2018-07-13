@@ -2,11 +2,11 @@
 
 *Chainable Promise Proxy*
 
-Lightweight no-dependencies ES6 [promise] [proxy] allowing you to drop non-stop `then()` or `await`
-and chain.
+Lightweight ES6 [Proxy] for [Promises] with no additional dependencies. Proxymise allows for method
+and property chaining without need for intermediate `then()` or `await` for cleaner and simpler code.
 
-[proxy]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
-[promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[Proxy]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+[Promises]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
 ## Use
 
@@ -35,7 +35,7 @@ const value = await proxymise(foo).bar().baz().qux;
 console.log(value);
 ```
 
-## Examples
+## Practical Examples
 
-- [fetch with JSON](https://github.com/kozhevnikov/proxymise/blob/master/test/fetch.test.js)
-- [Selenium WebDriverJS with Page Objects](https://github.com/kozhevnikov/proxymise/blob/master/test/selenium.test.js)
+- [Fetch and JSON parsing](https://github.com/kozhevnikov/proxymise/blob/master/test/fetch.test.js)
+- [Selenium WebDriverJS and Page Objects](https://github.com/kozhevnikov/proxymise/blob/master/test/selenium.test.js)
