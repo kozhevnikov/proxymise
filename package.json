@@ -13,9 +13,6 @@
     "lint": "eslint .",
     "test": "jest --verbose"
   },
-  "dependencies": {
-    "debug": "^3.1.0"
-  },
   "devDependencies": {
     "chromedriver": "^2.40.0",
     "eslint": "^4.19.1",
