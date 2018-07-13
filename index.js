@@ -30,7 +30,7 @@ const handler = {
 /** @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/get */
 const get = (target, property, receiver) => {
   const value = typeof target === 'object' ? Reflect.get(target, property, receiver) : target[property];
-  return typeof value === 'function' ? value.bind(target) : value;
+  return typeof value === 'function' && typeof value.bind === 'function' ? value.bind(target) : value;
 };
 
 module.exports = proxymise;

@@ -1,6 +1,6 @@
 {
   "name": "proxymise",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chainable Promise Proxy",
   "repository": "https://github.com/kozhevnikov/proxymise",
   "author": "Ilya Kozhevnikov <git@kozhevnikov.com>",

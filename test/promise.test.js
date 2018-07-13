@@ -81,4 +81,9 @@ describe('Promise', () => {
     });
     expect(await promise.foo().bar.baz()).toBe('qux');
   });
+
+  it('should support Promise.all', async () => {
+    const promises = ['foo', 'bar', 'baz'].map(o => Promise.resolve(o)).map(proxymise);
+    expect(await Promise.all(promises)).toEqual(['foo', 'bar', 'baz']);
+  });
 });
