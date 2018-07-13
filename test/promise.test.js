@@ -1,6 +1,24 @@
 const proxymise = require('..');
 
 describe('Promise', () => {
+  it('should support then', async () => {
+    const promise = proxymise({
+      async foo() {
+        return 'bar';
+      }
+    });
+    expect(await promise.foo().then(value => [value, 'baz'])).toEqual(['bar', 'baz']);
+  });
+
+  it('should support catch', async () => {
+    const promise = proxymise({
+      async foo() {
+        throw new Error();
+      }
+    });
+    expect(promise.foo().catch(() => 'catch')).resolves.toBe('catch');
+  });
+
   it('should get value', async () => {
     const promise = proxymise(Promise.resolve('foo'));
     expect(await promise).toBe('foo');

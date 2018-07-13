@@ -19,7 +19,7 @@ const handler = {
   get(target, property, receiver) {
     if (target.__proxy__) target = target();
 
-    if (property !== 'then' && typeof target.then === 'function') {
+    if (property !== 'then' && property !== 'catch' && typeof target.then === 'function') {
       return proxymise(target.then(value => get(value, property, receiver)));
     }
 
