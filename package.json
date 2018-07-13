@@ -17,12 +17,14 @@
     "debug": "^3.1.0"
   },
   "devDependencies": {
+    "chromedriver": "^2.40.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jest": "^21.17.0",
     "jest": "^23.4.0",
-    "node-fetch": "^2.1.2"
+    "node-fetch": "^2.1.2",
+    "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "eslintConfig": {
     "extends": [
