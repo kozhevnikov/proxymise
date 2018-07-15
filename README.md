@@ -1,6 +1,8 @@
 # Proxymise
 
-*Chainable Promise Proxy*
+[![npm](https://img.shields.io/npm/v/proxymise.svg)](https://www.npmjs.com/package/proxymise)
+
+Chainable Promise Proxy.
 
 Lightweight ES6 [Proxy] for [Promises] with no additional dependencies. Proxymise allows for method
 and property chaining without need for intermediate `then()` or `await` for cleaner and simpler code.
