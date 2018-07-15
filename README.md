@@ -40,6 +40,7 @@ console.log(value);
 ## Practical Examples
 
 - [Fetch and JSON parsing](https://github.com/kozhevnikov/proxymise/blob/master/test/fetch.test.js)
+- [Amazon DynamoDB and getting item](https://github.com/kozhevnikov/proxymise/blob/master/test/dynamodb.test.js)
 - [Selenium WebDriverJS and Page Objects](https://github.com/kozhevnikov/proxymise/blob/master/test/selenium.test.js)
 
 ## Performance
@@ -53,3 +54,7 @@ node test/benchmark.js
 with proxymise: 3907.582ms
 without proxymise: 3762.375ms
 ```
+
+## Limitations
+
+It is not possible to proxymise an ES6 class and then instantiate it because it is not possible to proxy its prototype. Instead proxymise the instance itself.
