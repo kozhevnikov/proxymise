@@ -8,7 +8,11 @@ const proxymise = (target) => {
 };
 
 const handler = {
-  /** @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/get */
+  construct(target, argumentsList) {
+    if (target.__proxy__) target = target();
+    return proxymise(Reflect.construct(target, argumentsList));
+  },
+
   get(target, property, receiver) {
     if (target.__proxy__) target = target();
     if (property !== 'then' && property !== 'catch' && typeof target.then === 'function') {
@@ -17,7 +21,6 @@ const handler = {
     return proxymise(get(target, property, receiver));
   },
 
-  /** @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler/apply */
   apply(target, thisArg, argumentsList) {
     if (target.__proxy__) target = target();
     if (typeof target.then === 'function') {
@@ -27,7 +30,6 @@ const handler = {
   }
 };
 
-/** @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/get */
 const get = (target, property, receiver) => {
   const value = typeof target === 'object' ? Reflect.get(target, property, receiver) : target[property];
   return typeof value === 'function' && typeof value.bind === 'function' ? value.bind(target) : value;
