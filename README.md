@@ -39,3 +39,15 @@ console.log(value);
 
 - [Fetch and JSON parsing](https://github.com/kozhevnikov/proxymise/blob/master/test/fetch.test.js)
 - [Selenium WebDriverJS and Page Objects](https://github.com/kozhevnikov/proxymise/blob/master/test/selenium.test.js)
+
+## Performance
+
+Proxymised [benchmark] with 10000 iterations is practically as performant as the non-proxymised one.
+
+[benchmark]: https://github.com/kozhevnikov/proxymise/blob/master/test/benchmark.js
+
+```shell
+node test/benchmark.js 
+with proxymise: 3907.582ms
+without proxymise: 3762.375ms
+```
