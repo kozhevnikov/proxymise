@@ -32,7 +32,10 @@ const handler = {
 
 const get = (target, property, receiver) => {
   const value = typeof target === 'object' ? Reflect.get(target, property, receiver) : target[property];
-  return typeof value === 'function' && typeof value.bind === 'function' ? value.bind(target) : value;
+  if (typeof value === 'function' && typeof value.bind === 'function') {
+    return Object.assign(value.bind(target), value);
+  }
+  return value;
 };
 
 module.exports = proxymise;

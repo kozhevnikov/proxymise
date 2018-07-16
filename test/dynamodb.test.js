@@ -1,14 +1,15 @@
-const AWS = require('aws-sdk');
 const proxymise = require('..');
 
-AWS.config.update({
+const AWS = require('aws-sdk');
+const AWS2 = proxymise(require('aws-sdk'));
+
+const config = {
   region: 'eu-west-2',
   endpoint: 'http://localhost:8000'
-});
+};
 
-const dynamodb = new AWS.DynamoDB();
-const client = new AWS.DynamoDB.DocumentClient();
-const client2 = proxymise(new AWS.DynamoDB.DocumentClient());
+AWS.config.update(config);
+AWS2.config.update(config);
 
 describe('DynamoDB', () => {
   const id = Date.now();
@@ -16,6 +17,7 @@ describe('DynamoDB', () => {
   const key = { TableName: table, Key: { id } };
 
   beforeAll(async () => {
+    const dynamodb = new AWS.DynamoDB();
     await dynamodb.createTable({
       TableName: table,
       KeySchema: [
@@ -30,6 +32,7 @@ describe('DynamoDB', () => {
       }
     }).promise();
 
+    const client = new AWS.DynamoDB.DocumentClient();
     await client.put({
       TableName: table,
       Item: {
@@ -42,13 +45,15 @@ describe('DynamoDB', () => {
   });
 
   it('should get item without proxymise', async () => {
+    const client = new AWS.DynamoDB.DocumentClient();
     const data = await client.get(key).promise();
     const value = data.Item.foo.bar;
     expect(value).toBe('baz');
   });
 
   it('should get item with proxymise', async () => {
-    const value = await client2.get(key).promise().Item.foo.bar;
+    const client = new AWS2.DynamoDB.DocumentClient();
+    const value = await client.get(key).promise().Item.foo.bar;
     expect(value).toBe('baz');
   });
 });

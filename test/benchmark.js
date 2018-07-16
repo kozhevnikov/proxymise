@@ -16,6 +16,8 @@ async function benchmark() {
 
   await mkdir(dir);
 
+  console.log(`${count} iterations`);
+
   console.time('with proxymise');
   for (let i = 0; i < count; i += 1) {
     const path = `${dir}/${i}.txt`;
