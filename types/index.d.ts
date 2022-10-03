@@ -7,5 +7,5 @@ type Proxymise<T> = {
 };
 
 declare module "proxymise" {
-  export default function <T>(target: T): Proxymise<T>;
+  export default function <T>(target: T): Promise<Proxymise<T>>;
 }
