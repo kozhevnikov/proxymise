@@ -6,6 +6,7 @@
   "author": "Ilya Kozhevnikov <git@kozhevnikov.com>",
   "license": "MIT",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "files": [
     "index.js"
   ],
